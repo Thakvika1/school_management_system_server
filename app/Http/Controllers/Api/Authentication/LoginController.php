@@ -25,6 +25,8 @@ class LoginController extends Controller
                 'message' => 'Invalid credentials'
             ], 401);
         }
+        
+        dd($user);
 
         // create a new token for the user to login and return it in the response
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -32,7 +34,7 @@ class LoginController extends Controller
         return response()->json([
             'user' => $user,
             'access_token' => $token,
-            'token_type' => 'Bearer',
+            // 'token_type' => 'Bearer',
         ]);
 
     }
