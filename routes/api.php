@@ -14,4 +14,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::post('/admin/create/teacher', [CreateUserController::class, 'storeTeacher']);
+//  Admin Routes
+Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
+    Route::post('/admin/create/teacher', [CreateUserController::class, 'storeTeacher']);
+});
