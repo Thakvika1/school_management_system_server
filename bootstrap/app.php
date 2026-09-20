@@ -5,6 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\TeacherMiddleware;
+use App\Http\Middleware\StudentMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -17,7 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // add custom middleware alias here
         $middleware->alias([
             'Admin' => AdminMiddleware::class,
-            'Teacher' => TeacherMiddleware::class
+            'Teacher' => TeacherMiddleware::class,
+            'Student' => StudentMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
