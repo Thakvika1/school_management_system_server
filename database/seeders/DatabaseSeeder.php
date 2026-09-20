@@ -29,6 +29,13 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
         ]);
     }
+
+    // public function run(): void
+    // {
+    //     GroupSubject::factory()->create();
+    // }
+
+    
     // run this command to seed data
     // php artisan db:seed
 }
