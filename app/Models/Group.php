@@ -17,13 +17,25 @@ class Group extends Model
         'name',
     ];
 
+
+    // Group ── hasMany ── Students
     public function students(): HasMany
     {
         return $this->hasMany(Student::class);
     }
 
+    // Group ── hasMany ── GroupSubjects
     public function groupSubjects(): HasMany
     {
         return $this->hasMany(GroupSubject::class);
     }
+
+    /* Example
+
+    $group = Group::find(1);
+
+    $students = $group->students;
+    $assignments = $group->groupSubjects;
+
+    */
 }

@@ -45,6 +45,8 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
+    // telling laravel the attribute type
     protected function casts(): array
     {
         return [
@@ -52,13 +54,25 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // User ── hasOne ── Teacher
     public function teacher(): HasOne
     {
         return $this->hasOne(Teacher::class);
     }
 
+    // User ── hasOne ── Student
     public function student(): HasOne
     {
         return $this->hasOne(Student::class);
     }
+
+
+    /* Example
+    $user = User::find(1);
+
+    $teacher = $user->teacher;
+    $student = $user->student;
+
+    */
 }

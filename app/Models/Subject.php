@@ -16,8 +16,17 @@ class Subject extends Model
         'description',
     ];
 
+    // Subject ── hasMany ── GroupSubjects
     public function groupSubjects(): HasMany
     {
         return $this->hasMany(GroupSubject::class);
     }
+
+    /* Example
+
+    $subject = Subject::find(1);
+
+    $assignments = $subject->groupSubjects;
+
+    */
 }

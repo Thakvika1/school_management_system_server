@@ -28,18 +28,31 @@ class Student extends Model
         ];
     }
 
+    // Student ── belongsTo ── User
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    // Student ── belongsTo ── Group
     public function group(): BelongsTo
     {
         return $this->belongsTo(Group::class);
     }
-
+    
+    // Student ── hasMany ── Attendances
     public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);
     }
+
+    /* Example
+
+    $student = Student::find(1);
+
+    $user = $student->user;
+    $group = $student->group;
+    $attendanceRecords = $student->attendances;
+
+    */
 }

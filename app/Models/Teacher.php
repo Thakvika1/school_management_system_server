@@ -17,13 +17,24 @@ class Teacher extends Model
         'teacher_code',
     ];
 
+    // Teacher ── belongsTo ── User
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    // Teacher ── hasMany ── GroupSubject
     public function groupSubjects(): HasMany
     {
         return $this->hasMany(GroupSubject::class);
     }
+
+    /* Example
+
+    $teacher = Teacher::find(1);
+
+    $user = $teacher->user;
+    $assignments = $teacher->groupSubjects;
+
+    */
 }

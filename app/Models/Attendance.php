@@ -26,14 +26,23 @@ class Attendance extends Model
             'checked_in_at' => 'datetime',
         ];
     }
-
+    // Attendance ── belongsTo ── AttendanceSession
     public function attendanceSession(): BelongsTo
     {
         return $this->belongsTo(AttendanceSession::class);
     }
 
+    // Attendance ── belongsTo ── Student
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }
+
+    /*
+    $attendance = Attendance::find(1);
+
+    $student = $attendance->student;
+    $session = $attendance->attendanceSession;
+    
+    */
 }
