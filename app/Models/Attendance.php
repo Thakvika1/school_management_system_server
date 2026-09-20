@@ -3,8 +3,46 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\AttendanceSession;
+use App\Models\Student;
+
 
 class Attendance extends Model
 {
-    //
+    use HasFactory;
+
+    protected $fillable = [
+        'attendance_session_id',
+        'student_id',
+        'status',
+        'checked_in_at',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'checked_in_at' => 'datetime',
+        ];
+    }
+    // Attendance ── belongsTo ── AttendanceSession
+    public function attendanceSession(): BelongsTo
+    {
+        return $this->belongsTo(AttendanceSession::class);
+    }
+
+    // Attendance ── belongsTo ── Student
+    public function student(): BelongsTo
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    /*
+    $attendance = Attendance::find(1);
+
+    $student = $attendance->student;
+    $session = $attendance->attendanceSession;
+    
+    */
 }

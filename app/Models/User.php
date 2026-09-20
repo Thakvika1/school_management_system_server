@@ -7,11 +7,16 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Teacher;
+use App\Models\Student;
+
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -39,11 +45,34 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
+    // telling laravel the attribute type
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            // 'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
+
+    // User ── hasOne ── Teacher
+    public function teacher(): HasOne
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
+    // User ── hasOne ── Student
+    public function student(): HasOne
+    {
+        return $this->hasOne(Student::class);
+    }
+
+
+    /* Example
+    $user = User::find(1);
+
+    $teacher = $user->teacher;
+    $student = $user->student;
+
+    */
 }
