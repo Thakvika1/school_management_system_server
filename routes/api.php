@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Authentication\LoginController;
 
 // Admin Controller
 use App\Http\Controllers\Api\Admin\CreateUserController;
+use App\Http\Controllers\Api\Admin\Group\CreateGroupController;
 
 // Teacher Controller
 use App\Http\Controllers\Api\Teacher\TestController;
@@ -25,6 +26,7 @@ Route::post('/login', [LoginController::class, 'login']);
 //  Admin Routes
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::post('/admin/create/teacher', [CreateUserController::class, 'storeTeacher']);
+    Route::post('/admin/create/group', [CreateGroupController::class, 'store']);
 });
 
 
