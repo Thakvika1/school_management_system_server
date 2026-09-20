@@ -8,7 +8,13 @@ use App\Http\Controllers\Api\Authentication\LoginController;
 
 // Admin Controller
 use App\Http\Controllers\Api\Admin\CreateUserController;
+
+use App\Http\Controllers\Api\Admin\Group\ListGroupController;
+use App\Http\Controllers\Api\Admin\Group\DetailGroupController;
 use App\Http\Controllers\Api\Admin\Group\CreateGroupController;
+use App\Http\Controllers\Api\Admin\Group\EditGroupController;
+use App\Http\Controllers\Api\Admin\Group\DeleteGroupController;
+
 
 // Teacher Controller
 use App\Http\Controllers\Api\Teacher\TestController;
@@ -25,10 +31,16 @@ Route::post('/login', [LoginController::class, 'login']);
 
 //  Admin Routes
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
+    // User
     Route::post('/admin/create/teacher', [CreateUserController::class, 'storeTeacher']);
-    Route::post('/admin/create/group', [CreateGroupController::class, 'store']);
-});
 
+    // Group
+    Route::get('/admin/group/list', [ListGroupController::class, 'index']);
+    Route::get('/admin/group/detail/{id}', [DetailGroupController::class, 'show']);
+    Route::post('/admin/group/create', [CreateGroupController::class, 'store']);
+    Route::put('/admin/group/update/{id}', [EditGroupController::class, 'update']);
+    Route::delete('/admin/group/delete/{id}', [DeleteGroupController::class, 'destroy']);
+});
 
 // Teacher Routes
 Route::middleware(['auth:sanctum', 'Teacher'])->group(function () {
