@@ -18,8 +18,8 @@ class DeleteTeacherController extends Controller
 
             $user = User::findOrFail($teacher->user_id);
 
-            $user->delete();
             $teacher->delete();
+            $user->delete();
             DB::commit();
 
             return response()->json([
