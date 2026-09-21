@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // Authentication Controller
 use App\Http\Controllers\Api\Authentication\LoginController;
+use App\Http\Controllers\Api\Authentication\LogoutController;
 
 // Admin Controller
 use App\Http\Controllers\Api\Admin\CreateUserController;
@@ -24,9 +25,13 @@ use App\Http\Controllers\Api\Student\StudentTestController;
 
 
 
-// Auth Routes
+// Public Routes
 Route::post('/login', [LoginController::class, 'login']);
 
+// Protected Routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [LogoutController::class, 'logout']);
+});
 
 
 //  Admin Routes
@@ -41,6 +46,7 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::put('/admin/group/update/{id}', [EditGroupController::class, 'update']);
     Route::delete('/admin/group/delete/{id}', [DeleteGroupController::class, 'destroy']);
 });
+
 
 // Teacher Routes
 Route::middleware(['auth:sanctum', 'Teacher'])->group(function () {
