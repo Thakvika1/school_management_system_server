@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-
+        try {
         // validate the request data
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -36,5 +36,11 @@ class LoginController extends Controller
             'access_token' => $token,
             // 'token_type' => 'Bearer',
         ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
