@@ -47,6 +47,10 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::put('/admin/teacher/update/{id}', [EditTeacherController::class, 'update']);
     Route::delete('/admin/teacher/delete/{id}', [DeleteTeacherController::class, 'destroy']);
 
+    // User Student
+    Route::post('/admin/create/student', [CreateUserController::class, 'storeStudent']);
+
+
     // Group
     Route::get('/admin/group/list', [ListGroupController::class, 'index']);
     Route::get('/admin/group/detail/{id}', [DetailGroupController::class, 'show']);
@@ -66,3 +70,4 @@ Route::middleware(['auth:sanctum', 'Teacher'])->group(function () {
 Route::middleware(['auth:sanctum', 'Student'])->group(function () {
     Route::get('/student', [StudentTestController::class, 'index']);
 });
+
