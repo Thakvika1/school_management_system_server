@@ -7,13 +7,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Authentication\LoginController;
 use App\Http\Controllers\Api\Authentication\LogoutController;
 
-// Admin Controller
+// Admin User Teacher Controller
 use App\Http\Controllers\Api\Admin\UserTeacher\ListTeacherController;
-use App\Http\Controllers\Api\Admin\CreateUserController;
+use App\Http\Controllers\Api\Admin\UserTeacher\CreateTeacherController;
 use App\Http\Controllers\Api\Admin\UserTeacher\DetailTacherController;
 use App\Http\Controllers\Api\Admin\UserTeacher\EditTeacherController;
 use App\Http\Controllers\Api\Admin\UserTeacher\DeleteTeacherController;
 
+// Admin User Student Controller
+use App\Http\Controllers\Api\Admin\UserStudent\CreateStudentController;
+
+// Admin Group Controller
 use App\Http\Controllers\Api\Admin\Group\ListGroupController;
 use App\Http\Controllers\Api\Admin\Group\DetailGroupController;
 use App\Http\Controllers\Api\Admin\Group\CreateGroupController;
@@ -29,8 +33,14 @@ use App\Http\Controllers\Api\Student\StudentTestController;
 
 
 
+
+
+
+
+
 // Public Routes
 Route::post('/login', [LoginController::class, 'login']);
+
 
 // Protected Routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -42,14 +52,13 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     // User Teacher
     Route::get('/admin/teacher/list', [ListTeacherController::class, 'index']);
-    Route::post('/admin/create/teacher', [CreateUserController::class, 'storeTeacher']);
+    Route::post('/admin/create/teacher', [CreateTeacherController::class, 'storeTeacher']);
     Route::get('/admin/teacher/detail/{id}', [DetailTacherController::class, 'show']);
     Route::put('/admin/teacher/update/{id}', [EditTeacherController::class, 'update']);
     Route::delete('/admin/teacher/delete/{id}', [DeleteTeacherController::class, 'destroy']);
 
     // User Student
-    Route::post('/admin/create/student', [CreateUserController::class, 'storeStudent']);
-
+    Route::post('/admin/create/student', [CreateStudentController::class, 'storeStudent']);
 
     // Group
     Route::get('/admin/group/list', [ListGroupController::class, 'index']);
