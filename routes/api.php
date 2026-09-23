@@ -15,7 +15,11 @@ use App\Http\Controllers\Api\Admin\UserTeacher\EditTeacherController;
 use App\Http\Controllers\Api\Admin\UserTeacher\DeleteTeacherController;
 
 // Admin User Student Controller
+use App\Http\Controllers\Api\Admin\UserStudent\ListStudentController;
 use App\Http\Controllers\Api\Admin\UserStudent\CreateStudentController;
+use App\Http\Controllers\Api\Admin\UserStudent\DetailStudentController;
+use App\Http\Controllers\Api\Admin\UserStudent\EditStudentController;
+use App\Http\Controllers\Api\Admin\UserStudent\DeleteStudentController;
 
 // Admin Group Controller
 use App\Http\Controllers\Api\Admin\Group\ListGroupController;
@@ -58,7 +62,12 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::delete('/admin/teacher/delete/{id}', [DeleteTeacherController::class, 'destroy']);
 
     // User Student
+    Route::get('/admin/student/list', [ListStudentController::class, 'index']);
     Route::post('/admin/create/student', [CreateStudentController::class, 'storeStudent']);
+    Route::get('/admin/student/detail/{id}', [DetailStudentController::class, 'show']);
+    Route::put('/admin/student/update/{id}', [EditStudentController::class, 'update']);
+    Route::delete('/admin/student/delete/{id}', [DeleteStudentController::class, 'destroy']);
+
 
     // Group
     Route::get('/admin/group/list', [ListGroupController::class, 'index']);
