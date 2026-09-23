@@ -52,13 +52,13 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     // User Teacher
     Route::get('/admin/teacher/list', [ListTeacherController::class, 'index']);
-    Route::post('/admin/create/teacher', [CreateTeacherController::class, 'storeTeacher']);
+    Route::post('/admin/teacher/create', [CreateTeacherController::class, 'storeTeacher']);
     Route::get('/admin/teacher/detail/{id}', [DetailTacherController::class, 'show']);
     Route::put('/admin/teacher/update/{id}', [EditTeacherController::class, 'update']);
     Route::delete('/admin/teacher/delete/{id}', [DeleteTeacherController::class, 'destroy']);
 
     // User Student
-    Route::post('/admin/create/student', [CreateStudentController::class, 'storeStudent']);
+    Route::post('/admin/student/create', [CreateStudentController::class, 'storeStudent']);
 
     // Group
     Route::get('/admin/group/list', [ListGroupController::class, 'index']);
