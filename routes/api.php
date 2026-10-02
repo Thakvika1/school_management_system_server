@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,9 @@ use App\Http\Controllers\Api\Admin\UserTeacher\EditTeacherController;
 use App\Http\Controllers\Api\Admin\UserTeacher\DeleteTeacherController;
 
 // Admin User Subject Controller
+use App\Http\Controllers\Api\Admin\Subject\ListSubjectController;
 use App\Http\Controllers\Api\Admin\Subject\CreateSubjectController;
+use App\Http\Controllers\Api\Admin\Subject\ShowSubjectController;
 use App\Http\Controllers\Api\Admin\Subject\DeleteSubjectController;
 use App\Http\Controllers\Api\Admin\Subject\EditSubjectController;
 
@@ -67,8 +70,10 @@ Route::middleware(['auth:sanctum', 'Admin'])->group(function () {
     Route::delete('/admin/teacher/delete/{id}', [DeleteTeacherController::class, 'destroy']);
 
     // Subject
+    Route::get('/admin/subject/list', [ListSubjectController::class, 'index']);
     Route::post('/admin/subject/create', [CreateSubjectController::class, 'storeSubject']);
     Route::put('/admin/subject/update/{id}', [EditSubjectController::class, 'update']);
+    Route::get('/admin/subject/show/{id}', [ShowSubjectController::class, 'show']);
     Route::delete('/admin/subject/delete/{id}', [DeleteSubjectController::class, 'destroy']);
 
     // User Student
